@@ -51,9 +51,11 @@ done
 
 snapinstallcmd='snap install --classic '
 echo -e "$dset${PURPLE} Installing Aptitude packages${NC}\n"
+apt-get update
 $installcmd
 echo -e "\n\n$dset${PURPLE} Installing Snap packages${NC}\n"
 
+snap refresh
 for i in "${snappackages[@]}"
 do
 	$snapinstallcmd$i
