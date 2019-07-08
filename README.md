@@ -14,7 +14,7 @@ dev$etup is a simple script to automatically install all your developpement envi
 
 ## Usage
 
-When your dev$etup script is set, open your terminal and type ```./devSetup.sh```
+When your dev$etup script is set, open your terminal and type ```sudo bash ./devSetup.sh```
 
 ## Configuration
 
