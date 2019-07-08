@@ -7,7 +7,7 @@
 #aptitudes packages
 aptitudepackages=( "wget" "snapd" "git" "vim" "zip" "unzip" "docker" "docker.io" "docker-compose" "python3" "python3-pip" "htop" "nodejs" "vlc")
 #snapd packages
-snappackages=( "vscode" "insomnia")
+snappackages=( "code" "insomnia")
 #Config files to replace (write the name of the file in the config folder and the place where it should be after the install separated by a space)
 cfgfiles=("vimrc /etc/vim/vimrc")
 
