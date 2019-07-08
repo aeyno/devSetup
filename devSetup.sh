@@ -5,7 +5,7 @@
 #### PARAMETERS ####:
 #Softwares to install
 #aptitudes packages
-aptitudepackages=( "wget" "snapd" "git" "vim" "zip" "unzip" "virtualbox-6.0" "docker" "docker.io" "docker-compose" "python3" "python3-pip" "htop" "nodejs" "vlc")
+aptitudepackages=( "wget" "snapd" "git" "vim" "zip" "unzip" "docker" "docker.io" "docker-compose" "python3" "python3-pip" "htop" "nodejs" "vlc")
 #snapd packages
 snappackages=( "vscode" "insomnia")
 #Config files to replace (write the name of the file in the config folder and the place where it should be after the install separated by a space)
