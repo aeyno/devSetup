@@ -5,7 +5,7 @@
 #### PARAMETERS ####:
 #Softwares to install
 #aptitudes packages
-softwares=( "wget" "snapd" "git" "vim" "zip" "unzip" "virtualbox-6.0" "docker" "docker.io" "docker-compose" "python3" "python3-pip" "htop" "nodejs" "vlc")
+aptitudepackages=( "wget" "snapd" "git" "vim" "zip" "unzip" "virtualbox-6.0" "docker" "docker.io" "docker-compose" "python3" "python3-pip" "htop" "nodejs" "vlc")
 #snapd packages
 snappackages=( "vscode" "insomnia")
 #Config files to replace (write the name of the file in the config folder and the place where it should be after the install separated by a space)
@@ -44,7 +44,7 @@ echo -e "Bienvenue dans l'assistant d'installation d'environnement dev\$etup!\n(
 
 #Install
 installcmd='apt-get install '
-for i in "${softwares[@]}"
+for i in "${aptitudepackages[@]}"
 do
 	installcmd=$installcmd$i" "
 done
