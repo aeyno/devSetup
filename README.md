@@ -10,4 +10,4 @@
                               \/_/                        \/_/ 
 ```
 
-dev$etup is a simple script to automatically install all your developpement environnement on a new linux environnement by installing Aptitude packages, Snap packages, your custom config files and also your VScode extensions if you use it.
+dev$etup is a simple CLI tool to automatically install all your developpement environnement on a new linux environnement by installing Aptitude or Pacman packages, Snap packages, your custom config files and also your VScode extensions if you use it.
