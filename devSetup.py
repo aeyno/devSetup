@@ -17,6 +17,7 @@ def logo():
     print(nc)
 
 def isRoot():
+    #Verify whether the user is root or not
     if subprocess.check_output("whoami").decode("utf-8") == "root\n":
         return True
     else:
@@ -545,14 +546,19 @@ class Parameters:
         self.vsexts = "Profiles/" + profileName + "/vscodeextensions.txt"
         self.zipList = "Profiles/" + profileName + "/zip.txt"
 
-global p
-p = Parameters()
+
 
 if __name__ == '__main__':
     
     if not isRoot():
         print("please run as root")
         exit()
+
+    if not os.path.isdir("Profiles/"):
+        os.mkdir("Profiles/")
+    
+    global p
+    p = Parameters()
     logo()
 
     if len(sys.argv) > 1:
