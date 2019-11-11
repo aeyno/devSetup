@@ -260,7 +260,7 @@ def update_parameters(updateFunction, fileName, interactive, merge):
     if interactive:
         print("Would you like to edit the list? (y/N)")
         if input("> ") == "y":
-            subprocess.run("editor " + fileName, shell=True)
+            subprocess.run(p.editor + " " + fileName, shell=True)
     print("\n")
 
 def save_aptitude(args):
@@ -537,6 +537,7 @@ class Parameters:
         self.vsexts = "Profiles/Default/vscodeextensions.txt"
         self.zipList = "Profiles/Default/zip.txt"
         self.interactive = False
+        self.editor = ""
     
     def setProfile(self, profileName):
         self.profile = profileName
@@ -560,6 +561,17 @@ if __name__ == '__main__':
     global p
     p = Parameters()
     logo()
+
+    #Get the default editor
+    editor = subprocess.check_output(["whereis", "editor"]).decode("utf-8").split(" ")
+    if len(editor) > 1:
+        editor = editor[1]
+    elif os.environ.get('EDITOR') != None:
+        editor = os.environ.get('EDITOR')
+    else:
+        #If there is no default editor, choose nano
+        editor = subprocess.check_output(["whereis", "nano"]).decode("utf-8").split(" ")[1]
+    p.editor = editor
 
     if len(sys.argv) > 1:
         args = sys.argv[1:]
