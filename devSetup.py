@@ -315,7 +315,7 @@ def add_package(args):
         print(dset + purple + " Adding \"" + package + "\" to your package list" + nc)
         f = open(p.pkgsList, "a")  
         f.writelines(package)
-        f.close
+        f.close()
         print("\n")
 
 def add_snap(args):
@@ -329,7 +329,7 @@ def add_snap(args):
         print(dset + purple + " Adding \"" + package + "\" to your Snap packages" + nc)
         f = open(p.snapPkgs, "a")
         f.writelines(package)
-        f.close
+        f.close()
         print("\n")
 
 def add_config(args):
@@ -351,7 +351,7 @@ def add_config(args):
         if os.path.isfile(configFile):
             f = open(p.cfgList, "a")
             f.writelines(filename + ":" + configFile.replace("~", "$HOME"))
-            f.close
+            f.close()
             print("Please use \"save config\" to make a copy of this config file")
         else:
             print("Error: file " + configFile + " doesn't exist")
@@ -377,7 +377,7 @@ def add_zip(args):
         if os.path.isfile("Profiles/" + p.profile + "/zip/" + filename):
             f = open(p.zipList, "a")
             f.writelines(filename + ":" + path.replace("~", "$HOME"))
-            f.close
+            f.close()
         else:
             print("Error: file " + filename + " not found in Profiles/" + p.profile + "/zip/")
         print("\n")
@@ -393,7 +393,7 @@ def add_VSCodeExt(args):
         print(dset + purple + " Adding \"" + ext + "\" to your VSCode extensions" + nc)
         f = open(p.vsexts, "a")  
         f.writelines(ext)
-        f.close
+        f.close()
         print("\n")
 
 def add_profile(args):
