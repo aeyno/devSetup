@@ -23,6 +23,10 @@ def isRoot():
     else:
         return False
 
+def isInstalled(commandName):
+    if subprocess.check_output(["whereis",commandName]).decode("utf-8") != commandName+":\n":
+        return True
+    return False
 
 def readFile(filename):
     paramFile = open(filename, "r")
@@ -38,6 +42,9 @@ def writeFile(filename, data):
     subprocess.run("chmod -R 777 " + filename, shell=True)
 
 def installAptitude(parameters):
+    if not p.aptitudeInstalled:
+        print("Aptitude is not installed\n")
+        return
     cmd = "apt-get install "
     for x in readFile(parameters.pkgsList):
         cmd += x + " "
@@ -47,6 +54,9 @@ def installAptitude(parameters):
     print("\n")
 
 def updateAptitudePkgsList(parameters, merge=False):
+    if not p.aptitudeInstalled:
+        print("Aptitude is not installed\n")
+        return
     print(dset + purple + " Saving your Aptitude package list" + nc)
     pkgsList = subprocess.check_output(["apt", "list", "--installed"]).decode("utf-8")
     pkgsList = pkgsList.split("\n")[1:-1]
@@ -58,6 +68,9 @@ def updateAptitudePkgsList(parameters, merge=False):
         return newList
 
 def installPacman(parameters):
+    if not p.pacmanInstalled:
+        print("Pacman is not installed\n")
+        return
     cmd = "pacman -Sy "
     for x in readFile(parameters.pkgsList):
         cmd += x + " "
@@ -67,6 +80,9 @@ def installPacman(parameters):
     print("\n")
 
 def updatePacmanPkgsList(parameters, merge=False):
+    if not p.pacmanInstalled:
+        print("Pacman is not installed\n")
+        return
     print(dset + purple + " Saving your Pacman package list" + nc)
     pkgsList = subprocess.check_output(["pacman", "-Qe"]).decode("utf-8")
     pkgsList = pkgsList.split("\n")[:-1]
@@ -77,6 +93,9 @@ def updatePacmanPkgsList(parameters, merge=False):
         return pkgsList
 
 def installSnap(parameters):
+    if not p.snapInstalled:
+        print("Snap is not installed\n")
+        return
     print(dset + purple + " Installing Snap packages" + nc)
     cmd = "snap install "
     for x in readFile(parameters.snapPkgs):
@@ -85,6 +104,9 @@ def installSnap(parameters):
     print("\n")
 
 def updateSnapPkgsList(parameters, merge=False):
+    if not p.snapInstalled:
+        print("Snap is not installed\n")
+        return
     print(dset + purple + " Saving your Snap package list" + nc)
     pkgsList = subprocess.check_output(["snap", "list"]).decode("utf-8")
     pkgsList = pkgsList.split("\n")[1:-1]
@@ -124,6 +146,9 @@ def installZipFiles(parameters):
     print("\n")
 
 def installVSCodeExtensions(parameters):
+    if not p.VSCodeInstalled:
+        print("VS Code is not installed\n")
+        return
     print(dset + purple + " Installing VSCode extensions" + nc)
     for x in readFile(parameters.vsexts):
         cmd = "su " + parameters.homeDirectory[6:] + " -c \"code --install-extension " + x + "\""
@@ -132,6 +157,9 @@ def installVSCodeExtensions(parameters):
     print("\n")
 
 def updateVSCodeExtensions(parameters, merge=False):
+    if not p.VSCodeInstalled:
+        print("VS Code is not installed\n")
+        return
     print(dset + purple + " Saving your VSCode extensions list" + nc)
     extsList = subprocess.check_output(["su", parameters.homeDirectory[6:],"-c","code --list-extensions"]).decode("utf-8")
     if merge:
@@ -213,13 +241,13 @@ def install_packages(args):
         print("Unknown option " + args[0])
 
 def install_packages_auto(parameters):
-    if subprocess.check_output(["whereis","apt-get"]).decode("utf-8") != "apt-get:\n":
+    if p.aptitudeInstalled:
         #If Aptitude is installed
         installAptitude(parameters)
-    elif subprocess.check_output(["whereis","pacman"]).decode("utf-8") != "pacman:\n":
+    elif p.pacmanInstalled:
         #If Pacman is installed
         installPacman(parameters)
-    if subprocess.check_output(["whereis","snap"]).decode("utf-8") != "snap:\n":
+    if p.snapInstalled:
         #If Snap is installed
         installSnap(parameters)
 
@@ -240,13 +268,13 @@ def save_packages(args):
         print("Unknown option " + args[0])
 
 def save_packages_auto(args):
-    if subprocess.check_output(["whereis","apt-get"]).decode("utf-8") != "apt-get:\n":
+    if p.aptitudeInstalled:
         #If Aptitude is installed
         save_aptitude([])
-    elif subprocess.check_output(["whereis","pacman"]).decode("utf-8") != "pacman:\n":
+    elif p.pacmanInstalled:
         #If Pacman is installed
         save_pacman([])
-    if subprocess.check_output(["whereis","snap"]).decode("utf-8") != "snap:\n":
+    if p.snapInstalled:
         #If Snap is installed
         save_snap([])
 
@@ -264,6 +292,9 @@ def update_parameters(updateFunction, fileName, interactive, merge):
     print("\n")
 
 def save_aptitude(args):
+    if not p.aptitudeInstalled:
+        print("Aptitude is not installed\n")
+        return
     merge = False
     if len(args) > 0 and args[0] == "merge":
         args.pop(0)
@@ -273,6 +304,9 @@ def save_aptitude(args):
     update_parameters(updateAptitudePkgsList, p.pkgsList, p.interactive, merge)
 
 def save_pacman(args):
+    if not p.pacmanInstalled:
+        print("Pacman is not installed\n")
+        return
     merge = False
     if len(args) > 0 and args[0] == "merge":
         args.pop(0)
@@ -282,6 +316,9 @@ def save_pacman(args):
     update_parameters(updatePacmanPkgsList, p.pkgsList, p.interactive, merge)
 
 def save_snap(args):
+    if not p.snapInstalled:
+        print("Snap is not installed\n")
+        return
     merge = False
     if len(args) > 0 and args[0] == "merge":
         args.pop(0)
@@ -296,6 +333,9 @@ def save_config(args):
     updateConfigFiles(p)
 
 def save_VSCodeExts(args):
+    if not p.VSCodeInstalled:
+        print("VS Code is not installed\n")
+        return
     merge = False
     if len(args) > 0 and args[0] == "merge":
         args.pop(0)
@@ -538,6 +578,11 @@ class Parameters:
         self.zipList = "Profiles/Default/zip.txt"
         self.interactive = False
         self.editor = ""
+        self.snapInstalled = False
+        self.VSCodeInstalled = False
+        self.aptitudeInstalled = False
+        self.pacmanInstalled = False
+        self.checkInstalledPackages()
     
     def setProfile(self, profileName):
         self.profile = profileName
@@ -547,6 +592,11 @@ class Parameters:
         self.vsexts = "Profiles/" + profileName + "/vscodeextensions.txt"
         self.zipList = "Profiles/" + profileName + "/zip.txt"
 
+    def checkInstalledPackages(self):
+        self.snapInstalled = isInstalled("snap")
+        self.VSCodeInstalled = isInstalled("code")
+        self.aptitudeInstalled = isInstalled("apt-get")
+        self.pacmanInstalled = isInstalled("pacman")
 
 
 if __name__ == '__main__':
