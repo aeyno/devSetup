@@ -564,7 +564,6 @@ def remove_profile(args):
         print("Profile \"" + profile + "\" successfully removed.")
     print("\n")
 
-
 class Parameters:
     def __init__(self):
         if not os.path.isdir("Profiles/Default"):
@@ -600,7 +599,6 @@ class Parameters:
 
 
 if __name__ == '__main__':
-    
     if not isRoot():
         print("please run as root")
         exit()
@@ -625,7 +623,6 @@ if __name__ == '__main__':
 
     if len(sys.argv) > 1:
         args = sys.argv[1:]
-        #print(args)
         command(args)
     else:
         #Interactive mode
@@ -633,7 +630,6 @@ if __name__ == '__main__':
         while 1:
             cmd = input("> ")
             args = cmd.split(" ")
-            #print(args)
             if args[0] == "exit":
                 print("Goodbye!")
                 exit()
