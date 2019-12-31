@@ -354,7 +354,7 @@ def add_package(args):
             if not set_profile(args): return
         print(dset + purple + " Adding \"" + package + "\" to your package list" + nc)
         f = open(p.pkgsList, "a")  
-        f.writelines(package)
+        f.writelines(package + "\n")
         f.close()
         print("\n")
 
@@ -368,7 +368,7 @@ def add_snap(args):
             if not set_profile(args): return
         print(dset + purple + " Adding \"" + package + "\" to your Snap packages" + nc)
         f = open(p.snapPkgs, "a")
-        f.writelines(package)
+        f.writelines(package + "\n")
         f.close()
         print("\n")
 
@@ -390,7 +390,7 @@ def add_config(args):
         print(dset + purple + " Adding \"" + configFile + "\" as \"" + filename + "\" to your configuration files" + nc)
         if os.path.isfile(configFile):
             f = open(p.cfgList, "a")
-            f.writelines(filename + ":" + configFile.replace("~", "$HOME"))
+            f.writelines(filename + ":" + configFile.replace("~", "$HOME") + "\n")
             f.close()
             print("Please use \"save config\" to make a copy of this config file")
         else:
@@ -416,7 +416,7 @@ def add_zip(args):
         print(dset + purple + " Adding \"" + filename + "\" to your zip files" + nc)
         if os.path.isfile("Profiles/" + p.profile + "/zip/" + filename):
             f = open(p.zipList, "a")
-            f.writelines(filename + ":" + path.replace("~", "$HOME"))
+            f.writelines(filename + ":" + path.replace("~", "$HOME") + "\n")
             f.close()
         else:
             print("Error: file " + filename + " not found in Profiles/" + p.profile + "/zip/")
@@ -432,7 +432,7 @@ def add_VSCodeExt(args):
             if not set_profile(args): return
         print(dset + purple + " Adding \"" + ext + "\" to your VSCode extensions" + nc)
         f = open(p.vsexts, "a")  
-        f.writelines(ext)
+        f.writelines(ext + "\n")
         f.close()
         print("\n")
 
