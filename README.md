@@ -13,7 +13,7 @@
 **dev$etup** is a simple CLI tool to automatically install all your developpement environnement on a new linux environnement by installing Aptitude or Pacman packages, Snap packages, your custom config files and also your VScode extensions if you use it.
 
 ## Installation
-Make sur to have python 3 and download  **devsetup.py**
+Make sure to have python 3 and download  **devsetup.py**
 
 ## Usage
 
